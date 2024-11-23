@@ -18,7 +18,7 @@ void printFordFulkersonResult(const tuple<int, vector<tuple<int, int, int>>>& re
 
 
     // Itera sobre as arestas e imprime os detalhes
-    cout << "Arestas no fluxo residual:" << endl;
+    cout << "Alocação de Fluxo no grafo original:" << endl;
     for (const auto& aresta : arestas) {
         int u = get<0>(aresta); // Nó de origem
         int v = get<1>(aresta); // Nó de destino
@@ -32,10 +32,11 @@ void printFordFulkersonResult(const tuple<int, vector<tuple<int, int, int>>>& re
 }
 
 int main(int argc, char *argv[]) {
-    Grafo grafo = Grafo("grafo_rf_2.txt",false,true,true);
+    Grafo grafo = Grafo("grafo_rf_3.txt",false,true,true);
     tuple<int, vector<tuple<int, int, int>>> result = grafo.algoritmo_Ford_Fulkerson(1,2);
-    cout<< "fluxo máximo: " << get<0>(result) << endl;
     //printFordFulkersonResult(result);
+    grafo.writeFordFulkersonResultToFile("result.txt", result);
+    
 
     return 0;
 }

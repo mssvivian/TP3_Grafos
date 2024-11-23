@@ -842,5 +842,38 @@ void Grafo::atualizarFluxo(Grafo& grafoResidual, const vector<int>& caminho, int
     }
 }
 
+// função que escreve o resultado do algoritmo Ford Fulkerson em arquivo txt
+void Grafo::writeFordFulkersonResultToFile(const string& fileName, const tuple<int, vector<tuple<int, int, int>>>& result) {
+    // Abre o arquivo para escrita
+    ofstream outFile(fileName);
+
+    if (!outFile.is_open()) {
+        cerr << "Erro ao abrir o arquivo: " << fileName << endl;
+        return;
+    }
+
+    // Extrai o fluxo máximo e o vetor de arestas do resultado
+    int fluxoMaximo = get<0>(result);
+    const auto& arestas = get<1>(result);
+
+    // Escreve as arestas no arquivo
+    outFile << "Alocação de Fluxo no Grafo Original:" << endl;
+    for (const auto& aresta : arestas) {
+        int u = get<0>(aresta); // Nó de origem
+        int v = get<1>(aresta); // Nó de destino
+        int fluxo = get<2>(aresta); // fluxo alocado
+        outFile << "Origem: " << u << ", Destino: " << v 
+                << ", Fluxo Alocado: " << fluxo << endl;
+    }
+
+    // Escreve o fluxo máximo no arquivo
+    outFile << "Fluxo Máximo: " << fluxoMaximo << endl;
+
+    // Fecha o arquivo
+    outFile.close();
+
+    cout << "Resultado salvo no arquivo " << fileName << endl;
+}
+
 
 

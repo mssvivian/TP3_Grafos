@@ -120,5 +120,8 @@ public:
     // as arestas (e suas capaciodades) no grafo residual
     void atualizarFluxo(Grafo& grafoResidual, const vector<int>& caminho, int gargalo);
 
+    // função que escreve o resultado do algoritmo Ford Fulkerson em arquivo txt
+    void writeFordFulkersonResultToFile(const string& fileName, const tuple<int, vector<tuple<int, int, int>>>& result);
+
 };
 #endif // GRAPH_H
